@@ -5,15 +5,16 @@ function Book(bookName, bookDesc, bookID) {
     throw Error("You must use the 'new' operator to call this Object");
   }
   
-  this.bookName = bookName;
-  this.bookDesc = bookDesc;
-  this.bookID = bookID;
+  this.title = bookName;
+  this.description = bookDesc;
+  this.ID = bookID;
 }
 
 const libraryInterface = {
   title: document.querySelector("#title"),
   description: document.querySelector("#description"),
   addButton: document.querySelector("#addBook"),
+  libraryContainer: document.querySelector("#library"),
 }
 
 function interfaceListeners() {
@@ -21,11 +22,12 @@ function interfaceListeners() {
 }
 
 function addButtonFunc(event) {
-  addBookToLibrary();
-  resetInterface();
-  console.log(library);
-  
   event.preventDefault();
+  
+  const newBook = addBookToLibrary();
+  resetInterface();
+  displayBookToInterface(newBook);
+  
 }
 
 function addBookToLibrary() {
@@ -35,17 +37,24 @@ function addBookToLibrary() {
   
   const newBook = new Book(title, description, id);
   library.push(newBook);
+  return newBook;
 }
 
 function resetInterface() {
-  libraryInterface.title.textContent = "";
-  libraryInterface.description.textContent = "";
+  libraryInterface.title.value = "";
+  libraryInterface.description.value = "";
 }
 
-function displayBookToInterface() {
-  for (const book of library) {
-    console.log(book);
-  }
+function displayBookToInterface(book) {
+  libraryInterface.libraryContainer.appendChild(bookContainer(book));
+}
+
+function bookContainer(book) {
+  const bookDiv = document.createElement("div");
+  const bookContent = document.createTextNode(`Title: ${book.title} Description: ${book.description} ID: ${book.ID}`);
+
+  bookDiv.appendChild(bookContent);
+  return bookDiv;
 }
 
 interfaceListeners();
