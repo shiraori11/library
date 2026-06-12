@@ -4,16 +4,23 @@
   <meta charset="UTF-8">
   <title>Library</title>
   <script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   
-  <form>
+  <form class="addBookForm">
     <label for="title">Title:</label>
     <input type="text" id="title" placeholder="Book title">
     
     <label for="description">Description:</label>
     <textarea id="description" placeholder="Book description"></textarea>
-    
+    <div class="radioContainer">
+      <label for="readStatus">Status: </label>
+      <select name="status" id="readStatus">
+        <option value="unread">Unread</option>
+        <option value="read">Read</option>
+      </select>
+    </div>
     <input type="submit" value="Add book" id="addBook">
   </form>
   

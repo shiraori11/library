@@ -51,6 +51,8 @@ function displayBookToInterface(book) {
 
 function bookContainer(book) {
   const bookDiv = document.createElement("div");
+  bookDiv.setAttribute("class", "book");
+  bookDiv.setAttribute("data-book-id", book.ID);
   const bookContent = document.createTextNode(`Title: ${book.title} Description: ${book.description} ID: ${book.ID}`);
 
   bookDiv.appendChild(bookContent);
