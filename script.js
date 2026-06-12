@@ -70,7 +70,12 @@ function bookContainer(book) {
   const title = bookContainerPara(book.title, "class-test");
   const description = bookContainerPara(book.description, "descClass");
   const author = bookContainerPara(book.author, "authorClass");
-  const status = bookContainerPara(book.status, "statusClass");
+  
+  const status = document.createElement("select");
+  const unread = selectOption("unread", book);
+  const read = selectOption("read", book);
+  status.append(unread, read);
+  
   const pages = bookContainerPara(book.pages, "pagesClass");
 
   bookDiv.append(title, description, author, status, pages);
@@ -84,6 +89,30 @@ function bookContainerPara(text, paraClass) {
   newPara.setAttribute("class", paraClass);
 
   return newPara;
+}
+
+function bookContainerButton() {
+  const buttonDiv = document.createElement("div");
+  buttonDiv.setAttribute("class", "bookButtonContainer");
+
+  const deleteButton = document.createElement("button");
+  deleteButton.setAttribute("class", "deleteButton");
+}
+
+function selectOption(name, book) {
+  const selectElement = document.createElement("option");
+
+
+  selectElement.setAttribute("id", name);
+  selectElement.setAttribute("value", name)
+  selectElement.textContent = name;
+
+  if (book.status == name) {
+    selectElement.setAttribute("selected", true);
+  }
+
+
+  return selectElement;
 }
 
 interfaceListeners();
