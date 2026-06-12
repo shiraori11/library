@@ -1,13 +1,9 @@
 .addBookForm {
   display: grid;
-  grid-template-rows: repeat(3, 25px 1fr);
+  grid-template-rows: repeat(5, 25px 1fr);
 }
 
-.radioContainer {
+.statusContainer {
   display: grid;
   grid-template-columns: 60px 1fr;
-}
-
-.radioContainer input[type="radio"] {
-  width: auto;
 }

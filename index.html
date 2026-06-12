@@ -14,16 +14,31 @@
     
     <label for="description">Description:</label>
     <textarea id="description" placeholder="Book description"></textarea>
-    <div class="radioContainer">
+
+    <label for="bookAuthor">Author: </label>
+    <input type="text" id="bookAuthor" placeholder="author">
+
+    <label for="bookPages">Pages: </label>
+    <input type="number" id="bookPages" placeholder="1" min="1">
+    
+    <div class="statusContainer">
       <label for="readStatus">Status: </label>
       <select name="status" id="readStatus">
-        <option value="unread">Unread</option>
+        <option value="unread" selected>Unread</option>
         <option value="read">Read</option>
       </select>
     </div>
     <input type="submit" value="Add book" id="addBook">
   </form>
   
-  <div id="library"></div>
+  <div id="library">
+    <div>
+      <p>Book Title by Author</p>
+      <p>Pages: 245 pages</p>
+      <p>Read Status: Unread</p>
+      <p>Description</p>
+      <p>Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum</p>
+    </div>
+  </div>
 </body>
 </html>
