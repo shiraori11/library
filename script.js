@@ -16,11 +16,12 @@ function Book(title, description, ID, author, status, pages) {
 const libraryInterface = {
   title: document.querySelector("#title"),
   description: document.querySelector("#description"),
-  addButton: document.querySelector("#addBook"),
+  addButton: document.querySelector("#addBook"), 
   author: document.querySelector("#bookAuthor"),
   status: document.querySelector("#readStatus"),
   pages: document.querySelector("#bookPages"),
   libraryContainer: document.querySelector("#library"),
+  delete: document.querySelectorAll(".deleteButton"),
 }
 
 function interfaceListeners() {
@@ -30,10 +31,9 @@ function interfaceListeners() {
 function addButtonFunc(event) {
   event.preventDefault();
   
-  const newBook = addBookToLibrary();
+  addBookToLibrary();
   resetInterface();
-  displayBookToInterface(newBook);
-  
+  displayBookToInterface();
 }
 
 function addBookToLibrary() {
@@ -58,14 +58,19 @@ function resetInterface() {
   libraryInterface.description.value = "";
 }
 
-function displayBookToInterface(book) {
-  libraryInterface.libraryContainer.appendChild(bookContainer(book));
+function displayBookToInterface() {
+  libraryInterface.libraryContainer.innerHTML = "";
+  
+  for (const book of library) {
+    libraryInterface.libraryContainer.appendChild(bookContainer(book));
+  }
 }
 
 function bookContainer(book) {
   const bookDiv = document.createElement("div");
   bookDiv.setAttribute("class", "book");
-  bookDiv.setAttribute("data-book-id", book.ID);
+  // bookDiv.setAttribute("data-book-id", book.ID);
+  bookDiv.setAttribute("id", book.ID);
 
   const title = bookContainerPara(book.title, "class-test");
   const description = bookContainerPara(book.description, "descClass");
@@ -77,8 +82,10 @@ function bookContainer(book) {
   status.append(unread, read);
   
   const pages = bookContainerPara(book.pages, "pagesClass");
+  const deleteButton = bookContainerDel(book);
+  deleteButton.addEventListener("click", deleteBtnFunc);
 
-  bookDiv.append(title, description, author, status, pages);
+  bookDiv.append(title, description, author, status, pages, deleteButton);
 
   return bookDiv;
 }
@@ -91,17 +98,27 @@ function bookContainerPara(text, paraClass) {
   return newPara;
 }
 
-function bookContainerButton() {
-  const buttonDiv = document.createElement("div");
-  buttonDiv.setAttribute("class", "bookButtonContainer");
-
+function bookContainerDel(book) {
   const deleteButton = document.createElement("button");
+  
   deleteButton.setAttribute("class", "deleteButton");
+  deleteButton.setAttribute("data-delete-id", book.ID);
+  deleteButton.textContent = "Delete Book";
+
+  return deleteButton;
+}
+
+function deleteBtnFunc(event) {
+  const id = event.target.dataset.deleteId;
+  
+  const deletedLibrary = library.filter((book) => book.ID !== id);
+  library = deletedLibrary;
+  
+  displayBookToInterface();
 }
 
 function selectOption(name, book) {
   const selectElement = document.createElement("option");
-
 
   selectElement.setAttribute("id", name);
   selectElement.setAttribute("value", name)
@@ -110,7 +127,6 @@ function selectOption(name, book) {
   if (book.status == name) {
     selectElement.setAttribute("selected", true);
   }
-
 
   return selectElement;
 }
