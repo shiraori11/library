@@ -1,9 +1,16 @@
 .addBookForm {
   display: grid;
-  grid-template-rows: repeat(5, 25px 1fr);
+  grid-template-rows: repeat(4, 25px 1fr);
+  gap: 4px
 }
 
 .statusContainer {
   display: grid;
   grid-template-columns: 60px 1fr;
+}
+
+#library {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 250px;
 }

@@ -7,38 +7,44 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <button popovertarget="addBookDialog">Add Book</button>
   
-  <form class="addBookForm">
-    <label for="title">Title:</label>
-    <input type="text" id="title" placeholder="Book title">
-    
-    <label for="description">Description:</label>
-    <textarea id="description" placeholder="Book description"></textarea>
+  <dialog id="addBookDialog" popover>
+    <form class="addBookForm">
+      <label for="title">Title:</label>
+      <input type="text" id="title" placeholder="Book title">
+      
+      <label for="description">Description:</label>
+      <textarea id="description" placeholder="Book description"></textarea>
 
-    <label for="bookAuthor">Author: </label>
-    <input type="text" id="bookAuthor" placeholder="author">
+      <label for="bookAuthor">Author: </label>
+      <input type="text" id="bookAuthor" placeholder="author">
 
-    <label for="bookPages">Pages: </label>
-    <input type="number" id="bookPages" placeholder="1" min="1">
-    
-    <div class="statusContainer">
-      <label for="readStatus">Status: </label>
-      <select name="status" id="readStatus">
-        <option value="unread" selected>Unread</option>
-        <option value="read">Read</option>
-      </select>
-    </div>
-    <input type="submit" value="Add book" id="addBook">
-  </form>
+      <label for="bookPages">Pages: </label>
+      <input type="number" id="bookPages" placeholder="1" min="1">
+      
+      <div class="statusContainer">
+        <label for="readStatus">Status: </label>
+        <select name="status" id="readStatus">
+          <option value="unread" selected>Unread</option>
+          <option value="read">Read</option>
+        </select>
+      </div>
+      <input type="submit" value="Add book" id="addBook">
+    </form>
+  </dialog>
   
   <div id="library">
-    <div>
+    <button>
+    <div onclick="">
       <p>Book Title by Author</p>
       <p>Pages: 245 pages</p>
       <p>Read Status: Unread</p>
       <p>Description</p>
       <p>Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum</p>
-    </div>
+    </div></button>
+    
   </div>
 </body>
 </html>

@@ -62,13 +62,28 @@ function displayBookToInterface() {
   libraryInterface.libraryContainer.innerHTML = "";
   
   for (const book of library) {
-    libraryInterface.libraryContainer.appendChild(bookContainer(book));
+    [a, b] = bookContainer(book);
+    libraryInterface.libraryContainer.append(a, b);
   }
 }
 
 function bookContainer(book) {
-  const bookDiv = document.createElement("div");
+  const bookCover = document.createElement("button");
+  bookCover.setAttribute("popovertarget", book.ID);
+  
+  const bookCoverDiv = document.createElement("div");
+  bookCoverDiv.setAttribute("class", "bookCoverClass");
+  
+  const bookCoverTitle = document.createElement("p");
+  bookCoverTitle.textContent = book.title;
+
+  bookCoverDiv.appendChild(bookCoverTitle);
+  bookCover.appendChild(bookCoverDiv);
+  
+  
+  const bookDiv = document.createElement("dialog");
   bookDiv.setAttribute("class", "book");
+  bookDiv.setAttribute("popover", "");
   // bookDiv.setAttribute("data-book-id", book.ID);
   bookDiv.setAttribute("id", book.ID);
 
@@ -87,7 +102,7 @@ function bookContainer(book) {
 
   bookDiv.append(title, description, author, status, pages, deleteButton);
 
-  return bookDiv;
+  return [bookCover, bookDiv];
 }
 
 function bookContainerPara(text, paraClass) {
